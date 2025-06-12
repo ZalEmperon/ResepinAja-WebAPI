@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    // USE API ON : SEARCH PRODUCT, COMMENT, SAVE UNSAVE, 
     public function register(Request $request)
     {
         $request->validate([
@@ -25,9 +26,11 @@ class AuthController extends Controller
             'role'          => 'user',
         ]);
 
-        return response()->json([
+        return $request->wantsJson() ?
+        response()->json([
             'message' => 'Registrasi berhasil',
-        ], 201);
+        ], 201)
+        : redirect()->back()->with('success', "Registrasi Berhasil");
     }
 
     public function login(Request $request)
@@ -48,21 +51,23 @@ class AuthController extends Controller
         }
 
         $token = $user->createToken('mobile_auth')->plainTextToken;
-
         Auth::login($user);
-        return response()->json([
+
+        return $request->wantsJson() ?
+        response()->json([
             'message' => 'Login berhasil',
             'token' => $token,
             'user' => $user,
-        ], 200);
+        ], 200)
+        : redirect()->back()->with('success', "Login Berhasil");
     }
 
     public function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return response()->json(['message' => 'Logout berhasil.'], 200);
+        return redirect()->back()->with('success', "Logout Berhasil");
     }
 
     public function logoutToken(Request $request)

@@ -15,7 +15,10 @@ class BahanResep extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'id_resep', 'nama_bahan',
+        'id_resep',
+        'nama_bahan',
+        'jml_bahan',
+        'stn_bahan'
     ];
 
     public function resep()

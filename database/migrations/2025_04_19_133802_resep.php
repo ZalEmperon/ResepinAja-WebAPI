@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('judul');
             $table->string('gambar');
             $table->text('deskripsi');
+            $table->string('wkt_masak');
+            $table->string('prs_masak');
             $table->integer('id_user');                   // harus sama tipe dengan users.id_user
             $table->timestamps();
 

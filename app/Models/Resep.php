@@ -16,6 +16,9 @@ class Resep extends Model
         'judul',
         'gambar',
         'deskripsi',
+        'wkt_masak',
+        'prs_resep',
+        'ktg_masak',
         'id_user',
     ];
 

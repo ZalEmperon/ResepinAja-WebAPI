@@ -12,9 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bahan_resep', function (Blueprint $table) {
-            $table->id('id_bahan'); // custom primary key
-            $table->integer('id_resep'); // foreign key ke reseps
+            $table->id('id_bahan'); 
+            $table->integer('id_resep'); 
             $table->string('nama_bahan');
+            $table->integer('jml_bahan');
+            $table->enum('stn_bahan', ['Buah', 'gr', 'ml']);
             $table->timestamps();
         });
     }

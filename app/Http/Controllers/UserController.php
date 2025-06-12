@@ -13,11 +13,16 @@ class UserController extends Controller
 {
     public function showProfile($id_user) {
         $items = User::where("id_user", $id_user)->select('id_user', 'username', 'deskripsi_user')->first();
+        return $items;
+    }
+    public function APIshowProfile($id_user) {
+        $dataProfil = $this->showProfile($id_user);
         return response()->json([
             'success' => true,
-            'data' => $items
+            'data' => $dataProfil
         ], 200);
     }
+
     public function showRating($id_resep)
     {
         $items = DB::table('users')
@@ -106,7 +111,7 @@ class UserController extends Controller
 
         return response()->json([
             'is_saved' => $isSaved
-        ]);
+        ], 200);
     }
     public function editProfile(Request $request)
     {
